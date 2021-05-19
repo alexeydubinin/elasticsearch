@@ -23,6 +23,7 @@ import com.carrotsearch.randomizedtesting.generators.RandomNumbers;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import static org.elasticsearch.client.NodePriorityStrategy.NO_PRIORITY;
 import org.junit.After;
 
 import java.io.IOException;
@@ -67,7 +68,7 @@ public class RestClientMultipleHostsTests extends RestClientTestCase {
         }
         nodes = Collections.unmodifiableList(nodes);
         failureListener = new HostsTrackingFailureListener();
-        return new RestClient(httpClient, new Header[0], nodes, null, failureListener, nodeSelector, false, false);
+        return new RestClient(httpClient, new Header[0], nodes, null, failureListener, nodeSelector, NO_PRIORITY, false, false);
     }
 
     /**
