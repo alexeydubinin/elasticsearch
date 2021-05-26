@@ -37,6 +37,7 @@ plugins {
   id 'elasticsearch.docker-support'
   id 'elasticsearch.global-build-info'
   id "com.diffplug.spotless" version "5.6.1" apply false
+  id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
 apply from: 'gradle/build-scan.gradle'
@@ -68,6 +69,17 @@ configure(allprojects - project(':distribution:archives:integ-test-zip')) {
   project.pluginManager.withPlugin('nebula.maven-base-publish') {
     if (project.pluginManager.hasPlugin('elasticsearch.build') == false) {
       throw new GradleException("Project ${path} publishes a pom but doesn't apply the build plugin.")
+    }
+  }
+}
+
+nexusPublishing {
+  repositories {
+    hhNexus {
+      nexusUrl = uri("http://m2.hh.ru/content/groups/repos-all")
+      snapshotRepositoryUrl = uri("http://m2.hh.ru/content/repositories/snapshots")
+      username = ""
+      password = ""
     }
   }
 }

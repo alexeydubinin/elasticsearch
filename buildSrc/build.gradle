@@ -279,6 +279,12 @@ class VersionPropertiesLoader {
           elasticsearch
       )
     }
+
+    String versionQualifier = loadedProps.getProperty("version_qualifier", "")
+    if(!versionQualifier.isEmpty()) {
+      elasticsearch += "-" + versionQualifier
+    }
+
     String qualifier = systemProperties.getProperty("build.version_qualifier", "");
     if (qualifier.isEmpty() == false) {
       if (qualifier.matches("(alpha|beta|rc)\\d+") == false) {

@@ -71,7 +71,7 @@ public final class Version implements Comparable<Version> {
     }
 
     public static Version fromString(final String s) {
-        return fromString(s, Mode.STRICT);
+        return fromString(s, Mode.RELAXED);
     }
 
     public static Version fromString(final String s, final Mode mode) {
